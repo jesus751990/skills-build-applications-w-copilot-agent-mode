@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
-  const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/leaderboard/`;
+  const endpoint = `https://animated-disco-jw4q7jx6wvcgv-8000.app.github.dev/api/leaderboard/`;
 
   useEffect(() => {
     fetch(endpoint)

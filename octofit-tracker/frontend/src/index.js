@@ -5,12 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
-// Set REACT_APP_CODESPACE_URL from environment variable
-if (process.env.REACT_APP_CODESPACE_URL !== 'https://animated-disco-jw4q7jx6wvcgv-8000.app.github.dev') {
-  process.env.REACT_APP_CODESPACE_URL = `https://animated-disco-jw4q7jx6wvcgv-8000.app.github.dev`;
-}
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

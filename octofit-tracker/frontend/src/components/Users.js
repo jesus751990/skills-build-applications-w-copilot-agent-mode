@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/users/`;
+  const endpoint = `https://animated-disco-jw4q7jx6wvcgv-8000.app.github.dev/api/users/`;
 
   useEffect(() => {
     fetch(endpoint)
