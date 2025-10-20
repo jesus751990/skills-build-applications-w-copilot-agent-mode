@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
-  const endpoint = `https://animated-disco-jw4q7jx6wvcgv-8000.app.github.dev/api/activities/`;
+  const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/activities/`;
 
   useEffect(() => {
     fetch(endpoint)
