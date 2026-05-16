@@ -1,0 +1,12 @@
+{
+  "name": "cli-calculator",
+  "version": "1.0.0",
+  "description": "Node.js CLI calculator supporting addition, subtraction, multiplication, and division",
+  "main": "src/calculator.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

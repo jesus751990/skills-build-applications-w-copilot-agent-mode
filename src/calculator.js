@@ -17,59 +17,72 @@
  *   node src/calculator.js 20 / 4   →  5
  */
 
-// Read arguments from the command line (skip 'node' and script path)
-const args = process.argv.slice(2);
-
-// Validate that exactly three arguments were provided
-if (args.length !== 3) {
-  console.error('Usage: node src/calculator.js <number1> <operator> <number2>');
-  console.error('Supported operators: + - * /');
-  process.exit(1);
+// Addition: returns the sum of a and b
+function add(a, b) {
+  return a + b;
 }
 
-const [arg1, operator, arg2] = args;
-
-// Parse operands as floating-point numbers
-const num1 = parseFloat(arg1);
-const num2 = parseFloat(arg2);
-
-// Validate that both operands are valid numbers
-if (isNaN(num1) || isNaN(num2)) {
-  console.error(`Error: "${isNaN(num1) ? arg1 : arg2}" is not a valid number.`);
-  process.exit(1);
+// Subtraction: returns the difference of a minus b
+function subtract(a, b) {
+  return a - b;
 }
 
-let result;
+// Multiplication: returns the product of a and b
+function multiply(a, b) {
+  return a * b;
+}
 
-switch (operator) {
-  // Addition: returns the sum of num1 and num2
-  case '+':
-    result = num1 + num2;
-    break;
+// Division: returns the quotient of a divided by b
+// Throws an error if b is zero to prevent division by zero
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error('Division by zero is not allowed.');
+  }
+  return a / b;
+}
 
-  // Subtraction: returns the difference of num1 minus num2
-  case '-':
-    result = num1 - num2;
-    break;
+// Evaluates an expression given two numeric operands and an operator string (+, -, *, /)
+function calculate(num1, operator, num2) {
+  switch (operator) {
+    case '+': return add(num1, num2);
+    case '-': return subtract(num1, num2);
+    case '*': return multiply(num1, num2);
+    case '/': return divide(num1, num2);
+    default:
+      throw new Error(`Unknown operator "${operator}". Supported operators: + - * /`);
+  }
+}
 
-  // Multiplication: returns the product of num1 and num2
-  case '*':
-    result = num1 * num2;
-    break;
+module.exports = { add, subtract, multiply, divide, calculate };
 
-  // Division: returns the quotient of num1 divided by num2
-  // Guards against division by zero
-  case '/':
-    if (num2 === 0) {
-      console.error('Error: Division by zero is not allowed.');
-      process.exit(1);
-    }
-    result = num1 / num2;
-    break;
+// Run as CLI only when executed directly (not required as a module)
+if (require.main === module) {
+  const args = process.argv.slice(2);
 
-  default:
-    console.error(`Error: Unknown operator "${operator}". Supported operators: + - * /`);
+  // Validate that exactly three arguments were provided
+  if (args.length !== 3) {
+    console.error('Usage: node src/calculator.js <number1> <operator> <number2>');
+    console.error('Supported operators: + - * /');
     process.exit(1);
-}
+  }
 
-console.log(`${num1} ${operator} ${num2} = ${result}`);
+  const [arg1, operator, arg2] = args;
+
+  // Parse operands as floating-point numbers
+  const num1 = parseFloat(arg1);
+  const num2 = parseFloat(arg2);
+
+  // Validate that both operands are valid numbers
+  if (isNaN(num1) || isNaN(num2)) {
+    console.error(`Error: "${isNaN(num1) ? arg1 : arg2}" is not a valid number.`);
+    process.exit(1);
+  }
+
+  try {
+    const result = calculate(num1, operator, num2);
+    console.log(`${num1} ${operator} ${num2} = ${result}`);
+  } catch (err) {
+    console.error(`Error: ${err.message}`);
+    process.exit(1);
+  }
+}
